@@ -12,14 +12,15 @@ These routines are based on the de-bouncing routines in C, written by Peter Dann
 
 PORTB is used for the button input pins (available on all AVR MCUs). Note that the smallest ATtiny MCUs have up to 6 I/O pins on port B (PB0-PB5), while these functions support a maximum	of 8 buttons. Trying to use I/O pins not available, or assigned other functions, produces undefined results.
 Connect keys as 'close to ground':
- 		:
- 		|
- 	PBn	+-----------+
- 		|			|
- 		|		 S1	 /
- 	PBm	+--..		|
- 		|			|
- 		:		   GND
+
+        :
+        |
+    PBn +-----------+
+        |           |
+        |         S1 /
+    PBm +--..       |
+        |           |
+        :          GND
 
 Tested on ATTiny45/85/2313.
 
