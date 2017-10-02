@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "gdb",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "name": "PlatformIO Debugger",
+            "target": "c:/Users/RonMoerman/OneDrive - Moerman/Documents/projects/asmlib/.pioenvs/attiny85/firmware.elf",
+            "gdbpath": "C:/Users/RonMoerman/.platformio/penv/Scripts/piodebuggdb",
+            "autorun": [ "source .pioinit" ]
+        }
+    ]
+}
