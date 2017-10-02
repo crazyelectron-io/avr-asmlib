@@ -1,2 +1,2 @@
 # avr-asmlib
-Various Atmel AVR 8-but MCU Assembler library routines
+Various Atmel AVR 8-bit MCU Assembler library routines
