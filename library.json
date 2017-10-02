@@ -1,0 +1,12 @@
+{
+    "name": "Keys",
+    "keywords": "button, key, bounce, debounce, keys, buttons",
+    "description": "Read keys, including repeat and long prss and debounce",
+    "repository":
+    {
+        "type": "git",
+        "url": "https://github.com/justclouds/avr-asmlib.git"
+    },
+    "frameworks": "arduino",
+    "platforms": "atmelavr"
+}
