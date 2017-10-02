@@ -1,4 +1,4 @@
-;*==================================================================================================*;
+/*==================================================================================================*;
 ;*SYNOPSIS:
 ;*	Basic FIFO and LIFO Queue processing functions for AVR 8-bit MCUs.
 ;*
@@ -32,9 +32,9 @@
 ;*	$Author: Ron Moerman $
 ;*	$Email: ron@moerman.cc $
 ;*	$Date: Sunday, October 19, 2014 09:46:17 UTC $
-;*==================================================================================================*;
+;*==================================================================================================*/
 
-;*==================================================================================================*;
+/*==================================================================================================*;
 ;*                                   I N C L U D E   H E A D E R S                                  *;
 ;*==================================================================================================*/
 
@@ -44,11 +44,11 @@
 #include <queue.h>									//Queue structure/data definitions.
 
 
-;*==================================================================================================*;
-;*                                   L O C A L   C O N S T A N T S
-;*==================================================================================================*;
+/*==================================================================================================*;
+;*                                   L O C A L   C O N S T A N T S									*;
+;*==================================================================================================*/
 
-; Queue data structure offset values.
+// Queue data structure offset values.
 #define Q_LOCK 0										//Queue locked flag (0x00=Unlocked, 0xFF=Locked).
 #define Q_SIZE (Q_LOCK+1)								//Data buffer length.
 #define Q_COUNT (Q_SIZE+1)								//Element number.
@@ -56,22 +56,15 @@
 #define Q_OUT (Q_IN+1)									//Extraction point offset.
 #define Q_OVF (Q_OUT+1)									//Non-zero indicates buffer overflow.
 #define Q_BUFF (Q_OVF+1)								//Address of data buffer.
-; Size of queue structure.
+// Size of queue structure.
 #define QUEUE_STRUCT_SIZE (Q_BUFF+2)
 
 
-;*==================================================================================================*;
-;*                              R E G I S T E R   D E F I N I T I O N S
-;*==================================================================================================*;
+/*==================================================================================================*;
+;*                                L I N K E R   D E F I N I T I O N S								*;
+;*==================================================================================================*/
 
-;----- None -----
-
-
-;*==================================================================================================*;
-;*                                L I N K E R   D E F I N I T I O N S
-;*==================================================================================================*;
-
-; Make these library funtions externally accessible.
+// Make these library funtions externally accessible.
 		.global queue_init
 		.global queue_free
 		.global queue_flush
@@ -80,14 +73,14 @@
 		.global queue_length
 
 
-;*==============================================================================*;
-;*                                  P R O G R A M   S E C T I O N
-;*==============================================================================*;
+/*==================================================================================================*;
+;*                                  P R O G R A M   S E C T I O N									*;
+;*==================================================================================================*/
 		.section .text
 
-/*------------------------------------------------------------------------------*
- * queue_init: Set up an empty FIFO/LIFO queue structure.
- *------------------------------------------------------------------------------*
+/*------------------------------------------------------------------------------*;
+ * queue_init: Set up an empty FIFO/LIFO queue structure.						*;
+ *------------------------------------------------------------------------------*;
  *DESCRIPTION:
  *	Set up a new FIFO/LIFO queue by initializing all values to an 'empty queue'
  *	state. The memory for the queue structure and the data buffer is dynamically
@@ -143,8 +136,8 @@ queue_init_exit:
 .endfunc
 
 
-;*------------------------------------------------------------------------------*;
-;* queue_free: Release a queue structure and data buffer.
+/*------------------------------------------------------------------------------*;
+;* queue_free: Release a queue structure and data buffer.						*;
 ;*------------------------------------------------------------------------------*;
 ;*DESCRIPTION:
 ;*	Release the previously initialized queue memory (structure and data buffer).
@@ -164,7 +157,7 @@ queue_init_exit:
 ;*NOTES:
 ;*	1.	It is assumed that no ISR tries to access the FIFO Queue during/after
 ;*			this routine.
-;*------------------------------------------------------------------------------*;
+;*------------------------------------------------------------------------------*/
 .func	queue_free
 queue_free:
 		PUSHM	XL,XH										;Save used registers.
@@ -182,8 +175,8 @@ queue_free:
 .endfunc
 
 
-;*------------------------------------------------------------------------------*;
-;* queue_flush: Reset the queue pointers and counters to 'empty'.
+/*------------------------------------------------------------------------------*;
+;* queue_flush: Reset the queue pointers and counters to 'empty'.				*;
 ;*------------------------------------------------------------------------------*;
 ;*DESCRIPTION:
 ;*	Reset the queue pointers and counters to 'empty queue'.
@@ -202,7 +195,7 @@ queue_free:
 ;*
 ;*NOTES:
 ;*	1.	The lock flag is ignored (and reset) during queue flush.
-;*------------------------------------------------------------------------------*;
+;*------------------------------------------------------------------------------*/
 		.func queue_flush
 queue_flush:
 		ENTERCRITICAL
@@ -216,8 +209,8 @@ queue_flush:
 		.endfunc
 
 
-;*------------------------------------------------------------------------------*;
-;* queue_put: Put a byte in the FIFO/LIFO queue (@Z) at next free position.
+/*------------------------------------------------------------------------------*;
+;* queue_put: Put a byte in the FIFO/LIFO queue (@Z) at next free position.		*;
 ;*------------------------------------------------------------------------------*;
 ;*DESCRIPTION:
 ;*	Put a byte in the FIFO/LIFO queue (@Z) at next free position. Any error code
@@ -241,7 +234,7 @@ queue_flush:
 ;*NOTES:
 ;*	1.	This routine is ISR-proof and only disables interrupts while needed to
 ;*			(un)lock the queue.
-;*------------------------------------------------------------------------------*;
+;*------------------------------------------------------------------------------*/
 		.func queue_put
 queue_put:
 		PUSHM	R18,R19,YL,YH							;Save used registers.
@@ -307,7 +300,7 @@ _queue_exit:
 		.endfunc
 
 
-;*--------------------------------------------------------------------------------------------------*;
+/*--------------------------------------------------------------------------------------------------*;
 ;* queue_get: Read next byte (FIFO) from the queue @Z.												*;
 ;*--------------------------------------------------------------------------------------------------*;
 ;*DESCRIPTION:																						*;
@@ -330,7 +323,7 @@ _queue_exit:
 ;*																									*;
 ;*NOTES:																							*;
 ;*	1.	This routine is ISR-proof and only disables interrupts while needed to (un)lock the queue.	*;
-;*--------------------------------------------------------------------------------------------------*;
+;*--------------------------------------------------------------------------------------------------*/
 		.FUNC queue_get
 queue_get:
 		PUSHM	R18,R19,YL,YH
@@ -399,7 +392,7 @@ _queue_empty:
 ;*																									*;
 ;*NOTES:																							*;
 ;*	1.	This routine is ISR-proof and only disables interrupts while needed to (un)lock the queue.	*;
-;*--------------------------------------------------------------------------------------------------*;
+;*--------------------------------------------------------------------------------------------------*/
 		.func queue_length
 queue_length:
 		ldd	R24,Z+Q_COUNT

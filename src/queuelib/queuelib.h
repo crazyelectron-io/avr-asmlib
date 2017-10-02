@@ -36,14 +36,14 @@
  *                                   I N C L U D E   H E A D E R S
  *==================================================================================================*/
 //#define __SFR_OFFSET 0
-#include <avr_macros.h>									//General purpose assembler macros.
+#include <avr_macros.h>				    //General purpose assembler macros.
 
 /*===================================================================================================
  *                                         C O N S T A N T S
  *==================================================================================================*/
 //--- Queue limits.
-#define QUEUE_MAX_LEN	64            //Maximum length of queue data buffer.
-#define QUEUE_MIN_LEN	4             //Minumim length of queue data buffer.
+#define QUEUE_MAX_LEN	64              //Maximum length of queue data buffer.
+#define QUEUE_MIN_LEN	4               //Minumim length of queue data buffer.
 //--- Queue error codes.
 #define ERR_QUEUE_LOCKED 0x81
 #define ERR_QUEUE_EMPTY 0x82
@@ -54,15 +54,15 @@
  *                              R E G I S T E R   D E F I N I T I O N S
  *==================================================================================================*/
 #ifndef RETR
- #define RETR R24									  //Register for function return value.
+    #define RETR R24				    //Register for function return value.
 #endif
 // Queue parameter registers.
-#define QDR R24                     //Queue data byte register.
-#define QER R24                     //Queue function error code return register.
-#define QPR Z                       //Queue structure register.
+#define QDR R24                         //Queue data byte register.
+#define QER R24                         //Queue function error code return register.
+#define QPR Z                           //Queue structure register.
 #define QPRH ZH
 #define QPRL ZL
-#define QBR X                       //Queue data buffer register.
+#define QBR X                           //Queue data buffer register.
 #define QBRH XH
 #define QBRL XL
 
