@@ -1,14 +1,29 @@
+// AUTOMATICALLY GENERATED FILE. PLEASE DO NOT MODIFY IT MANUALLY
+
+// PIO Unified Debugger
+//
+// Documentation: http://docs.platformio.org/page/plus/debugging.html
+// Configuration: http://docs.platformio.org/page/projectconf/section_env_debug.html
+
 {
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "gdb",
+            "type": "platformio-debug",
             "request": "launch",
-            "cwd": "${workspaceRoot}",
             "name": "PlatformIO Debugger",
-            "target": "c:/Users/RonMoerman/OneDrive - Moerman/Documents/projects/asmlib/.pioenvs/attiny85/firmware.elf",
-            "gdbpath": "C:/Users/RonMoerman/.platformio/penv/Scripts/piodebuggdb",
-            "autorun": [ "source .pioinit" ]
+            "executable": "c:/Users/Ron/projects/atmel/avr-asmlib/.pioenvs/attiny85/firmware.elf",
+            "toolchainBinDir": "C:/Users/Ron/.platformio/packages/toolchain-atmelavr/bin",
+            "preLaunchTask": "PlatformIO: Pre-Debug",
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PlatformIO Debugger (Skip Pre-Debug)",
+            "executable": "c:/Users/Ron/projects/atmel/avr-asmlib/.pioenvs/attiny85/firmware.elf",
+            "toolchainBinDir": "C:/Users/Ron/.platformio/packages/toolchain-atmelavr/bin",
+            "internalConsoleOptions": "openOnSessionStart"
         }
     ]
 }
